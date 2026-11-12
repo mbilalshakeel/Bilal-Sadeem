@@ -1,0 +1,125 @@
+@using CRMwithAD.Module.BusinessObjects
+@using ClosedXML.Excel
+@using DevExpress.ExpressApp
+@using Microsoft.AspNetCore.Components.Forms
+@inject IObjectSpaceFactory ObjectSpaceFactory
+
+    <InputFile accept=".xlsx,.xls" OnChange="OnFileChange" />
+    <DxButton RenderStyle="ButtonRenderStyle.Primary" Click="UploadFile" class="mt-2">Upload File</DxButton>
+<br />
+@if (!string.IsNullOrEmpty(statusMessage))
+{
+    <div class="@statusClass">@statusMessage</div>
+}
+@if (importResult != null)
+{
+    <div class="mt-2">
+        <b>Import Summary:</b>
+        <ul>
+            <li>Added: @importResult.Added</li>
+            <li>Skipped (existing): @importResult.Skipped</li>
+        </ul>
+    </div>
+}
+
+@code {
+    private IBrowserFile? selectedFile;
+    private string statusMessage;
+    private string statusClass;
+    private ImportResult importResult;
+
+    private static readonly string[] RequiredColumns = { "Name", "Email", "Username" };
+
+    private class ImportResult
+    {
+        public int Added { get; set; }
+        public int Skipped { get; set; }
+    }
+
+    private void OnFileChange(InputFileChangeEventArgs e)
+    {
+        selectedFile = e.File;
+        statusMessage = string.Empty;
+        statusClass = string.Empty;
+        importResult = null;
+    }
+
+    private async Task UploadFile()
+    {
+        statusMessage = string.Empty;
+        statusClass = string.Empty;
+        importResult = null;
+
+        if (selectedFile == null)
+        {
+            statusMessage = "Please choose a file first.";
+            statusClass = "text-danger";
+            return;
+        }
+
+        var ext = System.IO.Path.GetExtension(selectedFile.Name).ToLowerInvariant();
+        if (ext != ".xlsx" && ext != ".xls")
+        {
+            statusMessage = "Only Excel files (.xlsx, .xls) are supported.";
+            statusClass = "text-danger";
+            return;
+        }
+
+        try
+        {
+            using var stream = new MemoryStream();
+            await selectedFile.OpenReadStream(10 * 1024 * 1024).CopyToAsync(stream); // 10 MB max
+            using var workbook = new XLWorkbook(stream);
+            var sheet = workbook.Worksheet(1);
+
+            // Validate columns
+            var colName = sheet.Cell(1, 1).GetString().Trim();
+            var colEmail = sheet.Cell(1, 2).GetString().Trim();
+            var colUsername = sheet.Cell(1, 3).GetString().Trim();
+            if (colName != "Name" || colEmail != "Email" || colUsername != "Username")
+            {
+                statusMessage = "Only columns [Name, Email, Username] in this order are supported.";
+                statusClass = "text-danger";
+                return;
+            }
+
+            int added = 0, skipped = 0;
+            var rowCount = sheet.LastRowUsed().RowNumber();
+
+            using var os = ObjectSpaceFactory.CreateObjectSpace(typeof(ApplicationUser));
+            for (int row = 2; row <= rowCount; row++)
+            {
+                var name = sheet.Cell(row, 1).GetString();
+                var email = sheet.Cell(row, 2).GetString();
+                var username = sheet.Cell(row, 3).GetString();
+
+                if (!string.IsNullOrWhiteSpace(username))
+                {
+                    var exists = os.GetObjectsQuery<ApplicationUser>()
+                                   .Any(u => u.UserName == username);
+                    if (exists)
+                    {
+                        skipped++;
+                        continue;
+                    }
+
+                    var user = os.CreateObject<ApplicationUser>();
+                    user.Name = name;
+                    user.Email = email;
+                    user.UserName = username;
+                    added++;
+                }
+            }
+
+            os.CommitChanges();
+            importResult = new ImportResult { Added = added, Skipped = skipped };
+            statusMessage = "Import completed.";
+            statusClass = "text-success";
+        }
+        catch (Exception ex)
+        {
+            statusMessage = $"Import failed: {ex.Message}";
+            statusClass = "text-danger";
+        }
+    }
+}

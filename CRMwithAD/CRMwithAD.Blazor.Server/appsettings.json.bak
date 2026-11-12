@@ -1,0 +1,83 @@
+﻿{
+  "ConnectionStrings": {
+    "ConnectionString": "Data Source=.;Initial Catalog=CRMwithAD;user id=sa;password=Login@786;",
+    "EasyTestConnectionString": "Data Source=.;Initial Catalog=CRMwithADEasyTest;user id=sa;password=Login@786;"
+    //"ConnectionString": "Data Source=10.169.223.21;Initial Catalog=CRMwithAD;user id=sa;password=Login@786;",
+    //"EasyTestConnectionString": "Data Source=10.169.223.21;Initial Catalog=CRMwithADEasyTest;user id=sa;password=Login@786;"
+  },
+  "URLs": {
+    "Billing": "http://192.168.4.55:8080/1.0/kb/",
+    "CMP": "https://192.168.4.74/",
+    "License": "https://localhost:44389/api/"
+  },
+  "Credentials": {
+    "CMPUsername": "hec.admin",
+    "CMPPassword": "Login@786"
+  },
+  "KeyPath": {
+    "Path": "D:\\Licenses\\" //local
+    //"Path": "Z:\\Licenses\\" //UAT
+  },
+  "Authentication": {
+    "Jwt": {
+      // For more information, refer to the following topic: Configure the JWT Authentication for the Web API https://docs.devexpress.com/eXpressAppFramework/403504
+      "Issuer": "My",
+      "Audience": "http://localhost:4200",
+      // The debug secret key. You should store sensitive settings in dedicated secret storage. For more information, refer to the following topic: https://learn.microsoft.com/en-us/aspnet/core/security/app-secrets?view=aspnetcore-7.0&tabs=windows.
+      "IssuerSigningKey": "d135667b-2895-40b4-ba39-bcbca12ae9ab"
+    }
+  },
+  "Logs": {
+  
+    "ErrorLogDirectory": "D:\\HEC\\Logs\\CRM ErrorLogs"
+  },
+  "Logging": {
+    "LogLevel": {
+      //"Default": "Information",
+      //"Microsoft": "Warning",
+      //"Microsoft.Hosting.Lifetime": "Information",
+      //"DevExpress.ExpressApp": "Information"
+      "Default": "Debug",
+      "Microsoft.AspNetCore": "Debug"
+    }
+  },
+  "DetailedErrors": true,
+  "AllowedHosts": "*",
+  "DevExpress": {
+    "ExpressApp": {
+      "Languages": "en-US;",
+      "ShowLanguageSwitcher": false,
+      "ThemeSwitcher": {
+        "DefaultItemName": "Office White",
+        "ShowSizeModeSwitcher": true,
+        "Groups": [
+          {
+            "Caption": "DevExpress Themes",
+            "Items": [
+              {
+                "Caption": "Blazing Berry",
+                "Url": "_content/DevExpress.Blazor.Themes/blazing-berry.bs5.min.css",
+                "Color": "#5c2d91"
+              },
+              {
+                "Caption": "Blazing Dark",
+                "Url": "_content/DevExpress.Blazor.Themes/blazing-dark.bs5.min.css",
+                "Color": "#46444a"
+              },
+              {
+                "Caption": "Office White",
+                "Url": "_content/DevExpress.Blazor.Themes/office-white.bs5.min.css",
+                "Color": "#fe7109"
+              },
+              {
+                "Caption": "Purple",
+                "Url": "_content/DevExpress.Blazor.Themes/purple.bs5.min.css",
+                "Color": "#7989ff"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

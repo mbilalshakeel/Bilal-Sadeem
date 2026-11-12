@@ -1,0 +1,134 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Application Title="HEC CLOUD CRM" VersionFormat="1.0.0">
+  <BOModel>
+    <Class Name="CRMwithAD.Module.BusinessObjects.HelpdeskTickets.Comment">
+      <OwnMembers>
+        <Member Name="Reply" Index="0" />
+        <Member Name="Attachment" Index="1" />
+      </OwnMembers>
+    </Class>
+  </BOModel>
+  <NavigationItems NavigationStyle="Accordion">
+    <Items>
+      <Item Id="MyAccountSettings" Caption="My Account Settings" Index="0" ImageName="" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="MyDetails" ViewId="ApplicationUser_DetailView" ObjectKey="@CurrentUserID" Caption="My Details" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="UsersManagement" Caption="Users Management" Index="1" ImageName="" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="ApplicationUser_ListView" ViewId="ApplicationUser_ListView" ObjectKey="" ImageName="" IsNewNode="True" />
+          <Item Id="PermissionPolicyRole_ListView" ViewId="PermissionPolicyRole_ListView" ObjectKey="" ImageName="" IsNewNode="True" />
+          <Item Id="Team_ListView" ViewId="Team_ListView" ObjectKey="" ImageName="" Visible="False" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="CustomersManagement" Caption="Customers Management" Index="2" ImageName="" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Account_ListView" ViewId="Account_ListView" ObjectKey="" Caption="Accounts" ImageName="" IsNewNode="True" />
+          <Item Id="Contact_ListView" ViewId="Contact_ListView" ObjectKey="" Caption="Contacts" Visible="False" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="HelpdeskTickets" Caption="Helpdesk Tickets" ImageName="" Index="3" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Category_ListView" ViewId="Category_ListView" ObjectKey="" Caption="Categories" ImageName="" IsNewNode="True" />
+          <Item Id="Comment_ListView" ViewId="Comment_ListView" ObjectKey="" Visible="False" ImageName="" IsNewNode="True" />
+          <Item Id="SubCategory_ListView" ViewId="SubCategory_ListView" ObjectKey="" Visible="False" IsNewNode="True" />
+          <Item Id="Ticket_ListView" ViewId="Ticket_ListView" ObjectKey="" Caption="Tickets" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="BillingManagement" Caption="Billing Management" Visible="True" ImageName="" Index="4" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Invoice_ListView" ViewId="Invoice_ListView" ObjectKey="" ImageName="" IsNewNode="True" />
+          <Item Id="Payment_ListView" ViewId="Payment_ListView" ObjectKey="" Visible="False" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="SubscriptionsManagement" Caption="Subscriptions Management" ImageName="" Index="5" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="SubscriptionPlan_ListView" ViewId="SubscriptionPlan_ListView" ObjectKey="" Caption="Subscription Plans" ImageName="" IsNewNode="True" />
+          <Item Id="UserSubscribedPlan_ListView" ViewId="UserSubscribedPlan_ListView" ObjectKey="" Caption="Users Subscribed Plans" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="CampaignsManagement" Caption="Campaigns Management" ImageName="" Index="6" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Campaign_ListView" ViewId="Campaign_ListView" ObjectKey="" Caption="Campaigns" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="SLAsManagement" Caption="SLAs Management" ImageName="" Index="7" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="MyBO_ListView" ViewId="MyBO_ListView" ObjectKey="" Visible="False" IsNewNode="True" />
+          <Item Id="SLA_ListView" ViewId="SLA_ListView" ObjectKey="" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="InventoryManagement" Caption="Inventory Management" ImageName="" Index="8" Visible="False" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Inventory_ListView" ViewId="Inventory_ListView" ObjectKey="" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="ConfigurationsManagement" Caption="Configurations Management" ImageName="" Index="9" Visible="False" IsNewNode="True" />
+      <Item Id="LicenseManagement" Caption="License Management" ImageName="" Index="10" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="License_ListView" ViewId="License_ListView" ObjectKey="" ImageName="" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="Default" Visible="False">
+        <Items>
+          <Item Id="Account_ListView" Removed="True" />
+          <Item Id="ApplicationUser_ListView" Removed="True" />
+          <Item Id="Campaign_ListView" Removed="True" />
+          <Item Id="Category_ListView" Removed="True" />
+          <Item Id="Comment_ListView" Removed="True" />
+          <Item Id="Contact_ListView" Removed="True" />
+          <Item Id="Event_ListView" Visible="False" Removed="True" />
+          <Item Id="Inventory_ListView" Removed="True" />
+          <Item Id="Invoice_ListView" Removed="True" />
+          <Item Id="Invoices_ListView" ViewId="Invoices_ListView" ObjectKey="" IsNewNode="True" Removed="True" />
+          <Item Id="License_ListView" Removed="True" />
+          <Item Id="MyDetails" Removed="True" />
+          <Item Id="Payment_ListView" Removed="True" />
+          <Item Id="PermissionPolicyRole_ListView" Removed="True" />
+          <Item Id="SLA_ListView" Removed="True" />
+          <Item Id="SubCategory_ListView" Removed="True" />
+          <Item Id="SubscriptionPlan_ListView" Removed="True" />
+          <Item Id="Team_ListView" Removed="True" />
+          <Item Id="Ticket_ListView" Removed="True" />
+          <Item Id="UserSubscribedPlan_ListView" Removed="True" />
+        </Items>
+      </Item>
+      <Item Id="Reports" Visible="False" />
+      <Item Id="SchedulerEvents" Caption="Scheduler Events" Visible="False" ImageName="" IsNewNode="True">
+        <Items IsNewNode="True">
+          <Item Id="Event_ListView" ObjectKey="" ViewId="Event_ListView" Visible="True" IsNewNode="True" />
+        </Items>
+      </Item>
+      <Item Id="State Machine" Visible="True" Caption="Customizable Process automation Workflows" ImageName="">
+        <Items>
+          <Item Id="XpoStateMachine_ListView" Caption="Customizable Process Automation Workflows" ImageName="" />
+        </Items>
+      </Item>
+    </Items>
+  </NavigationItems>
+  <Options UIType="TabbedMDI" RestoreTabbedMdiLayout="False" ShowTabImage="True" />
+  <SchemaModules>
+    <SchemaModule Name="CloneObjectModule" Version="25.1.6.0" IsNewNode="True" />
+    <SchemaModule Name="SchedulerBlazorModule" Version="25.1.6.0" IsNewNode="True" />
+    <SchemaModule Name="SchedulerModuleBase" Version="25.1.6.0" IsNewNode="True" />
+    <SchemaModule Name="SystemModule" Version="25.1.6.0" IsNewNode="True" />
+  </SchemaModules>
+  <Views>
+    <ListView Id="Comment_ListView">
+      <Columns>
+        <ColumnInfo Id="Date" SortOrder="Descending" DisplayFormat="{0:yyyy-MM-dd HH:mm}" EditMask="{0:yyyy-MM-dd HH:mm}" Visible="false"/>
+      </Columns>
+    </ListView>
+    <DetailView Id="ImportUsersBlazorHost_DetailView" Caption="Import Excel">
+      <Items>
+        <PropertyEditor Id="AD_Users" PropertyEditorType="CRMwithAD.Blazor.Server.Editors.ImportUsersBlazorHostPropertyEditor" />
+      </Items>
+    </DetailView>
+    <ListView Id="Ticket_Comments_ListView">
+      <Columns>
+        <ColumnInfo Id="Date" SortOrder="Descending" DisplayFormat="{0:yyyy-MM-dd HH:mm}" Visible="false"/>
+      </Columns>
+    </ListView>
+  </Views>
+</Application>
